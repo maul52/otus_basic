@@ -1,4 +1,11 @@
 #!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+	# user not root
+	echo "Please run script as root(use sudo)" 
+	exit 1
+fi
+
 # Установка Grafana
 #cat > /etc/yum.repos.d/grafana.repo
 # Добавляем репозиторий
