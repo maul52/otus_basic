@@ -1,4 +1,12 @@
-download
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+	# user not root
+	echo "Please run script as root(use sudo)" 
+	exit 1
+fi
+
+#download
 wget https://github.com/prometheus/prometheus/releases/download/v2.35.0/prometheus-2.35.0.linux-amd64.tar.gz
 # unpack
 tar xzvf prometheus-2.35.0.linux-amd64.tar.gz
