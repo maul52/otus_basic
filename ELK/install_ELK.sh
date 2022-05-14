@@ -9,7 +9,7 @@ fi
 read -p "Use VPN? (y , n, x to exit) " yn
     case $yn in
         [Yy]* ) 
-		echo 'Install Vpn"
+		echo "Install Vpn"
 		#vpn install
 		yum install yum-plugin-copr
 		yum copr enable dsommers/openvpn3
@@ -29,22 +29,21 @@ read -p "Use VPN? (y , n, x to exit) " yn
 yum -y install nano
 #java-latest-openjdk-devel.x86_64
 
-#cat <<EOF | sudo tee /etc/yum.repos.d/elasticsearch.repo
-echo [elasticsearch-7.x] > /etc/yum.repos.d/elasticsearch.repo
-echo name=Elasticsearch repository for 7.x packages >> /etc/yum.repos.d/elasticsearch.repo
-echo baseurl=https://artifacts.elastic.co/packages/7.x/yum >> /etc/yum.repos.d/elasticsearch.repo
-echo gpgcheck=1 >> /etc/yum.repos.d/elasticsearch.repo
-echo gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch >> /etc/yum.repos.d/elasticsearch.repo
-echo enabled=1 >> /etc/yum.repos.d/elasticsearch.repo
-echo autorefresh=1 >> /etc/yum.repos.d/elasticsearch.repo
-echo type=rpm-md >> /etc/yum.repos.d/elasticsearch.repo
+echo "[elasticsearch-7.x]" > /etc/yum.repos.d/elasticsearch.repo
+echo "name=Elasticsearch repository for 7.x packages" >> /etc/yum.repos.d/elasticsearch.repo
+echo "baseurl=https://artifacts.elastic.co/packages/7.x/yum" >> /etc/yum.repos.d/elasticsearch.repo
+echo "gpgcheck=1" >> /etc/yum.repos.d/elasticsearch.repo
+echo "gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch" >> /etc/yum.repos.d/elasticsearch.repo
+echo "enabled=1" >> /etc/yum.repos.d/elasticsearch.repo
+echo "autorefresh=1" >> /etc/yum.repos.d/elasticsearch.repo
+echo "type=rpm-md" >> /etc/yum.repos.d/elasticsearch.repo
 
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 
 echo '1 - install filebeat'
 echo '2 - install ELK'
-read -p 'Select component to install? (1 or 2) ' num
+read -p "Select component to install? (1 or 2) " num
     case $num in
         1 ) 
 		echo "Install filebit"
@@ -64,8 +63,8 @@ read -p 'Select component to install? (1 or 2) ' num
 		rpm -qi elasticsearch 
 
 		# Устанавливаем лимиты памяти для виртуальной машины Java	
-		echo '-Xms1g' > /etc/elasticsearch/jvm.options.d/jvm.options
-		echo '-Xmx1g' >> /etc/elasticsearch/jvm.options.d/jvm.options
+		echo "-Xms1g" > /etc/elasticsearch/jvm.options.d/jvm.options
+		echo "-Xmx1g" >> /etc/elasticsearch/jvm.options.d/jvm.options
 		
 		systemctl enable --now elasticsearch.service
 		systemctl enable --now logstash
@@ -73,6 +72,7 @@ read -p 'Select component to install? (1 or 2) ' num
 		# Accept iptables
 		iptables -A INPUT -p tcp --dport 9200 -j ACCEPT
 		service iptables save
+		echo "Press Enter"
 		curl -X PUT "http://127.0.0.1:9200/mytest_index"
 		
 		cp ./kibana.yml /etc/kibana/kibana.yml 
