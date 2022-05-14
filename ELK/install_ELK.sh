@@ -49,14 +49,12 @@ read -p 'Select component to install? (1 or 2) ' num
         1 ) 
 		echo 'Install filebit"
 		yum -y install filebeat
-		
 		# Filebeat config
-		cp ./filebeat.yml/etc/filebeat/filebeat.yml
+		cp ./filebeat.yml /etc/filebeat/filebeat.yml
 		# Start
 		systemctl enable filebeat
 		systemctl restart filebeat
-		systemctl restart nginx
-		;;
+		systemctl restart nginx;;
         2 )
 		#####################################
 		echo 'install ELK'
@@ -84,7 +82,7 @@ read -p 'Select component to install? (1 or 2) ' num
 		
 		cp ./logstash.yml /etc/logstash/logstash.yml
 		
-		cat > /etc/logstash/conf.d/logstash-nginx-es.conf
+		#cat > /etc/logstash/conf.d/logstash-nginx-es.conf
 
 		echo 'input {' > /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo '    beats {' >> /etc/logstash/conf.d/logstash-nginx-es.conf
@@ -123,8 +121,7 @@ read -p 'Select component to install? (1 or 2) ' num
 		echo ' }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo ' stdout { codec => rubydebug }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo '}' >> /etc/logstash/conf.d/logstash-nginx-es.conf
-		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf
-		;;
+		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf;;
     esac
 
 echo 'Disconnect VPN'
