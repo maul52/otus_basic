@@ -54,7 +54,8 @@ read -p 'Select component to install? (1 or 2) ' num
 		# Start
 		systemctl enable filebeat
 		systemctl restart filebeat
-		systemctl restart nginx;;
+		systemctl restart nginx
+		;;
         2 )
 		#####################################
 		echo 'install ELK'
@@ -121,7 +122,8 @@ read -p 'Select component to install? (1 or 2) ' num
 		echo ' }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo ' stdout { codec => rubydebug }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo '}' >> /etc/logstash/conf.d/logstash-nginx-es.conf
-		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf;;
+		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf
+		;;
     esac
 
 echo 'Disconnect VPN'
