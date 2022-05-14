@@ -2,7 +2,7 @@
 
 if [ "$EUID" -ne 0 ]; then
 	# user not root
-	echo 'Please run script as root(use sudo)" 
+	echo "Please run script as root(use sudo)" 
 	exit 1
 fi
 
