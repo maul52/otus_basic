@@ -22,7 +22,7 @@ read -p "Use VPN? (y , n, x to exit) " yn
 		
 		#vpn config & start
 		openvpn3 configs-list
-		openvpn3 config-import --config srv.ovpn --persistent
+		openvpn3 config-import --config srv.ovpn
 		openvpn3 session-start --config srv.ovpn
 		;;
         [Nn]* ) 			
@@ -136,5 +136,4 @@ echo 'Disconnect VPN'
 ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":");print $2}')
 echo $ACTIVE_SESSIONS
 openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
-			
-
+openvpn3 config-remove --config srv.ovpn
