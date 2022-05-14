@@ -26,7 +26,7 @@ read -p "Use VPN? (y , n, x to exit) " yn
 		;;
     esac
 
-yum -y install java-openjdk-devel java-openjdk nano
+yum -y install nano
 #java-latest-openjdk-devel.x86_64
 
 #cat <<EOF | sudo tee /etc/yum.repos.d/elasticsearch.repo
@@ -61,7 +61,7 @@ read -p "Select component to install? (1 or 2) " yn
         2 )
 		#####################################
 		echo 'select 2"
-		yum -y install java-openjdk-devel java-openjdk 
+		yum -y install java-latest-openjdk-devel.x86_64 java-openjdk 
 		yum -y install elasticsearch kibana logstash heartbeat-elastic
 		rpm -qi elasticsearch 
 
@@ -128,3 +128,10 @@ read -p "Select component to install? (1 or 2) " yn
 		
 		;;
     esac
+
+echo 'Disconnect VPN'
+ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":");print $2}')
+echo $ACTIVE_SESSIONS
+openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
+			
+			
