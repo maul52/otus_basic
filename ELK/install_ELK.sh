@@ -55,7 +55,6 @@ read -p 'Select component to install? (1 or 2) ' num
 		# Start
 		systemctl enable filebeat
 		systemctl restart filebeat
-		
 		systemctl restart nginx
 		;;
         2 )
@@ -125,7 +124,6 @@ read -p 'Select component to install? (1 or 2) ' num
 		echo ' stdout { codec => rubydebug }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo '}' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf
-		
 		;;
     esac
 
