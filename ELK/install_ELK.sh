@@ -9,11 +9,17 @@ fi
 read -p "Use VPN? (y , n, x to exit) " yn
     case $yn in
         [Yy]* ) 
-		echo "Install Vpn"
-		#vpn install
-		yum install yum-plugin-copr
-		yum copr enable dsommers/openvpn3
-		yum install openvpn3-client
+		ovpn=$(rpm -qa | grep openvpn3-client)
+		if [[ -z $ovpn ]]; then
+			echo "Install Vpn"
+			#vpn install
+			yum install yum-plugin-copr
+			yum copr enable dsommers/openvpn3
+			yum install openvpn3-client
+		else
+			echo "$ovpn already installed"
+		fi
+		
 		#vpn config & start
 		openvpn3 configs-list
 		openvpn3 config-import --config srv.ovpn --persistent
@@ -131,3 +137,18 @@ ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":
 echo $ACTIVE_SESSIONS
 openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
 			
+
+
+
+
+
+#yum clean all
+#yum makecache
+
+#sudo yum -y install elasticsearch kibana logstash filebeat auditbeat metricbeat packetbeat heartbeat-elastic 
+
+/var/lib/prometheus/lock
+
+ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":");print $2}')
+echo $ACTIVE_SESSIONS
+openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
