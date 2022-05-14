@@ -138,17 +138,3 @@ echo $ACTIVE_SESSIONS
 openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
 			
 
-
-
-
-
-#yum clean all
-#yum makecache
-
-#sudo yum -y install elasticsearch kibana logstash filebeat auditbeat metricbeat packetbeat heartbeat-elastic 
-
-/var/lib/prometheus/lock
-
-ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":");print $2}')
-echo $ACTIVE_SESSIONS
-openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
