@@ -47,7 +47,7 @@ echo '2 - install ELK'
 read -p 'Select component to install? (1 or 2) ' num
     case $num in
         1 ) 
-		echo 'Install filebit"
+		echo "Install filebit"
 		yum -y install filebeat
 		# Filebeat config
 		cp ./filebeat.yml /etc/filebeat/filebeat.yml
