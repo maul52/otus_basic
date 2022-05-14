@@ -60,14 +60,14 @@ read -p "Select component to install? (1 or 2) " yn
 		;;
         2 )
 		#####################################
-		echo 'select 2"
+		echo 'install ELK'
 		yum -y install java-latest-openjdk-devel.x86_64 java-openjdk 
 		yum -y install elasticsearch kibana logstash heartbeat-elastic
 		rpm -qi elasticsearch 
 
 		# Устанавливаем лимиты памяти для виртуальной машины Java	
-		echo '-Xms1g" > /etc/elasticsearch/jvm.options.d/jvm.options
-		echo '-Xmx1g" >> /etc/elasticsearch/jvm.options.d/jvm.options
+		echo '-Xms1g' > /etc/elasticsearch/jvm.options.d/jvm.options
+		echo '-Xmx1g' >> /etc/elasticsearch/jvm.options.d/jvm.options
 		
 		systemctl enable --now elasticsearch.service
 		systemctl enable --now logstash
@@ -124,7 +124,7 @@ read -p "Select component to install? (1 or 2) " yn
 		echo ' }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo ' stdout { codec => rubydebug }' >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		echo '}' >> /etc/logstash/conf.d/logstash-nginx-es.conf
-		echo '' >> /etc/logstash/conf.d/logstash-nginx-es.conf
+		echo >> /etc/logstash/conf.d/logstash-nginx-es.conf
 		
 		;;
     esac
@@ -133,5 +133,4 @@ echo 'Disconnect VPN'
 ACTIVE_SESSIONS=$(openvpn3 sessions-list | grep -i 'path' | awk '{p=index($0, ":");print $2}')
 echo $ACTIVE_SESSIONS
 openvpn3 session-manage --disconnect --session-path $ACTIVE_SESSIONS
-			
 			
