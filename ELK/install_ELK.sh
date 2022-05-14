@@ -42,8 +42,8 @@ echo type=rpm-md >> /etc/yum.repos.d/elasticsearch.repo
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 
-echo '1 - install filebeat"
-echo '2 - install ELK"
+echo '1 - install filebeat'
+echo '2 - install ELK'
 read -p "Select component to install? (1 or 2) " yn
     case $yn in
         1 ) 
