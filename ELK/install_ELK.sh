@@ -44,8 +44,8 @@ rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 echo '1 - install filebeat'
 echo '2 - install ELK'
-read -p "Select component to install? (1 or 2) " yn
-    case $yn in
+read -p 'Select component to install? (1 or 2) ' num
+    case $num in
         1 ) 
 		echo 'Install filebit"
 		yum -y install filebeat
